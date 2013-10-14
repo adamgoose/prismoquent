@@ -40,6 +40,16 @@ To use a custom predicated query (see the [Prismic.io API Documentation](https:/
 
     $documents = Prismic::query("your-predicated-query")->get();
 
+To sort the results by a particular date field, you can use the `getBy()` method *instead of the `get()` method*:
+
+    $documents = Prismic::collection('your-collection')->getBy('your-date-field');
+
+To fetch the document matching a particular slug, you can use the `getSlug()` method *instead of the `get()` method*:
+
+    $document = Prismic::getSlug('your-document-slug');
+
+> Note that the `getSlug()` method only returns a single instance of `\Prismic\Document` rather than array. Additionally, the slug matching is done on the basis of the `\Prismic\Document::slug()` method, therefore to generate a link, you can utilize `$document->slug()`.
+
 In addition to all of these methods, if you have an Application Token that has access to past and future releases, you can use the `ref()` method to declare whith release you'd like to use before the `collection()`, `mask()`, `tags()`, or `query()` method:
 
     $documents = Prismic::ref("your-revision-id")->collection("your-collection-id")->get();

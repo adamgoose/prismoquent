@@ -1,6 +1,7 @@
 <?php namespace Adamgoose\PrismicIo;
 
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\App;
 
 class Prismic {
 
@@ -11,7 +12,8 @@ class Prismic {
   protected $mask;
   protected $query;
 
-  public function __construct() {
+  public function __construct()
+  {
     $this->api = \Prismic\Api::get('https://' . Config::get('prismic-io::id') . '.prismic.io/api', Config::get('prismic-io::token'));
     $this->ref = $this->api->master()->ref;
     $this->forms = $this->api->forms();
@@ -23,7 +25,8 @@ class Prismic {
    * @param $ref string
    * @return $this
    */
-  public function ref($ref) {
+  public function ref($ref)
+  {
     $this->ref = $ref;
 
     return $this;
@@ -35,7 +38,8 @@ class Prismic {
    * @param $collection string
    * @return $this
    */
-  public function collection($collection) {
+  public function collection($collection)
+  {
     $this->collection = $collection;
 
     return $this;
@@ -47,7 +51,8 @@ class Prismic {
    * @param $mask string
    * @return $this
    */
-  public function mask($mask) {
+  public function mask($mask)
+  {
     $this->mask = $mask;
 
     return $this;
@@ -59,7 +64,8 @@ class Prismic {
    * @param $tags array
    * @return $this
    */
-  public function tags(array $tags) {
+  public function tags(array $tags)
+  {
     $this->tags = $tags;
 
     return $this;
@@ -71,7 +77,8 @@ class Prismic {
    * @param $query string
    * @return $this
    */
-  public function query($query) {
+  public function query($query)
+  {
     $this->query = $query;
 
     return $this;
@@ -82,7 +89,8 @@ class Prismic {
    *
    * @return array of \Prismic\Document
    */
-  public function get() {
+  public function get()
+  {
     if(isset($this->collection)) {
       $ctx = $this->forms->{$this->collection};
     } else {
@@ -104,6 +112,44 @@ class Prismic {
     }
 
     return $ctx->submit();
+  }
+
+  /*
+   * Executes the context API call and sorts the results
+   *
+   * @param $dateField string
+   * @param $dir string
+   * @return array of \Prismic\Document
+   */
+  public function getBy($dateField, $dir = 'asc')
+  {
+    $results = array();
+    foreach($this->get() as $document)
+    {
+      $results[$document->getDate($document->type.".".$dateField)->asEpoch()] = $document;
+    }
+
+    if($dir == 'asc')
+      ksort($results);
+    else
+      krsort($results);
+
+    return $results;
+  }
+
+  /*
+   * Executes the context API call and returns the slug-matched document
+   *
+   * @param $slug string
+   * @return \Prismic\Document
+   */
+  public function getSlug($slug)
+  {
+    foreach($this->get() as $document)
+      if($document->slug() == $slug)
+        return $document;
+
+    App::abort(404);
   }
 
 }
