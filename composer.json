@@ -1,6 +1,7 @@
 {
     "name": "adamgoose/prismic-io",
-    "description": "",
+    "description": "Prismic.io for Laravel",
+    "tags": ["Laravel"],
     "authors": [
         {
             "name": "Adam Engebretson",
@@ -13,9 +14,6 @@
         "prismic/php-sdk" : "dev-master"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-0": {
             "Adamgoose\\PrismicIo": "src/"
         }
