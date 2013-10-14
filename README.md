@@ -4,7 +4,7 @@
 
 ## Installation
 
-To install Prismic.io for Laravel, add `"prismic/php-sdk" : "dev-master"` to your `composer.json` file, and execute `composer update`.
+To install Prismic.io for Laravel, add `"adamgoose/prismic-io" : "dev-master"` to your `composer.json` file, and execute `composer update`.
 
 Next, open `/app/config/app.php`, and add `'Adamgoose\PrismicIo\PrismicIoServiceProvider',` to the `providers` array and `'Prismic' => 'Adamgoose\PrismicIo\Facades\Prismic',` to the `aliases` array.
 
