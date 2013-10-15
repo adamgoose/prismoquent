@@ -123,7 +123,8 @@ class Prismic {
    */
   public function getId($id)
   {
-    return $this->forms->everything->query('[[:d = at(document.id, "'.$id.'")]]')->submit()[0];
+    $ctx = $this->forms->everything->ref($this->ref)->query('[[:d = at(document.id, "' . $id . '")]]');
+    return $ctx->submit()[0];
   }
 
   /**
