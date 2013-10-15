@@ -19,7 +19,7 @@ class Prismic {
     $this->forms = $this->api->forms();
   }
 
-  /*
+  /**
    * Defines the context reference ID
    *
    * @param $ref string
@@ -32,7 +32,7 @@ class Prismic {
     return $this;
   }
 
-  /*
+  /**
    * Defines the context collection name
    *
    * @param $collection string
@@ -45,7 +45,7 @@ class Prismic {
     return $this;
   }
 
-  /*
+  /**
    * Defines the context mask name
    *
    * @param $mask string
@@ -58,7 +58,7 @@ class Prismic {
     return $this;
   }
 
-  /*
+  /**
    * Defines the context tags
    *
    * @param $tags array
@@ -71,7 +71,7 @@ class Prismic {
     return $this;
   }
 
-  /*
+  /**
    * Defines the context custom query
    *
    * @param $query string
@@ -84,7 +84,7 @@ class Prismic {
     return $this;
   }
 
-  /*
+  /**
    * Executes the context API call
    *
    * @return array of \Prismic\Document
@@ -114,7 +114,18 @@ class Prismic {
     return $ctx->submit();
   }
 
-  /*
+  /**
+   * Gets a document by its ID
+   *
+   * @param $id string
+   * @return \Prismic\Document
+   */
+  public function getId($id)
+  {
+    return $this->forms->everything->query('[[:d = at(document.id, "'.$id.'")]]')->submit()[0];
+  }
+
+  /**
    * Executes the context API call and sorts the results
    *
    * @param $dateField string
@@ -137,7 +148,7 @@ class Prismic {
     return $results;
   }
 
-  /*
+  /**
    * Executes the context API call and returns the slug-matched document
    *
    * @param $slug string
@@ -145,9 +156,15 @@ class Prismic {
    */
   public function getSlug($slug)
   {
+    if(Cache::has('prismic-'.$slug)) {
+      return $this->getId(Cache::get('prismic-'.$slug));
+    }
+
     foreach($this->get() as $document)
-      if($document->slug() == $slug)
+      if($document->slug() == $slug) {
+        Cache::put('prismic-'.$slug, $document->id, 99);
         return $document;
+      }
 
     App::abort(404);
   }

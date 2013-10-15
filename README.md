@@ -38,7 +38,7 @@ To get all of the documents using one or more tags, you can use the `tags()` met
 
 To use a custom predicated query (see the [Prismic.io API Documentation](https://developers.prismic.io/documentation/UjBe8bGIJ3EKtgBZ/api-documentation)), you can use the `query()` method:
 
-    $documents = Prismic::query("your-predicated-query")->get();
+    $documents = Prismic::query('your-predicated-query')->get();
 
 To sort the results by a particular date field, you can use the `getBy()` method *instead of the `get()` method*:
 
@@ -50,13 +50,19 @@ To fetch the document matching a particular slug, you can use the `getSlug()` me
 
 > Note that the `getSlug()` method only returns a single instance of `\Prismic\Document` rather than array. Additionally, the slug matching is done on the basis of the `\Prismic\Document::slug()` method, therefore to generate a link, you can utilize `$document->slug()`.
 
+To fetch a document by its ID, you can use the `getId()` method:
+
+    $document = Prismic::getId('your-document-id');
+
+> Note that the `getId()` method only returns a single instance of `\Prismic\Document` rather than an array.
+
 In addition to all of these methods, if you have an Application Token that has access to past and future releases, you can use the `ref()` method to declare whith release you'd like to use before the `collection()`, `mask()`, `tags()`, or `query()` method:
 
-    $documents = Prismic::ref("your-revision-id")->collection("your-collection-id")->get();
+    $documents = Prismic::ref('your-revision-id')->collection('your-collection-id')->get();
 
 Finally, you can combine these methods any way you'd like:
 
-    $documents = Prismic::collection("your-collection-id")->tags(array("my-tag-1", "my-tag-2"));
+    $documents = Prismic::collection('your-collection-id')->tags(array('my-tag-1', 'my-tag-2'));
 
 ## Troubleshooting and Support
 
