@@ -18,10 +18,6 @@ After installation, you'll want to configure Prismic.io for Laravel by editing `
 
 Prismic.io for Laravel assist you in accessing your Prismic.io Repository. It is essentially an API wrapper designed for Laravel developers. It will remind you a lot of Eloquent!
 
-## License
-
-Prismic.io for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
-
 To get all of the documents in a Prismic.io Collection, you can use the `collection()` method:
 
     $documents = Prismic::collection('my-collection')->get();
@@ -50,7 +46,7 @@ To fetch the document matching a particular slug, you can use the `getSlug()` me
 
 > Note that the `getSlug()` method only returns a single instance of `\Prismic\Document` rather than array. Additionally, the slug matching is done on the basis of the `\Prismic\Document::slug()` method, therefore to generate a link, you can utilize `$document->slug()`.
 
-To fetch a document by its ID, you can use the `getId()` method:
+To fetch a document by its ID, you can use the `getId()` method *instead of the `get()` method*:
 
     $document = Prismic::getId('your-document-id');
 
@@ -63,6 +59,10 @@ In addition to all of these methods, if you have an Application Token that has a
 Finally, you can combine these methods any way you'd like:
 
     $documents = Prismic::collection('your-collection-id')->tags(array('my-tag-1', 'my-tag-2'));
+
+## License
+
+Prismic.io for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 ## Troubleshooting and Support
 
