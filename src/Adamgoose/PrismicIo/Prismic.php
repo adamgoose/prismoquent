@@ -128,6 +128,17 @@ class Prismic {
   }
 
   /**
+   * Gets a document by its bookmark
+   *
+   * @param $bookmark string
+   * @return \Prismic\Document
+   */
+  public function getBookmark($bookmark)
+  {
+    return $this->getId($this->api->bookmarks()->{$bookmark});
+  }
+
+  /**
    * Executes the context API call and sorts the results
    *
    * @param $dateField string

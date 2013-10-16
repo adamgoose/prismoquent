@@ -52,6 +52,10 @@ To fetch a document by its ID, you can use the `getId()` method *instead of the 
 
 > Note that the `getId()` method only returns a single instance of `\Prismic\Document` rather than an array.
 
+You can also fetch a bookmarked document, by using the `getBookmark()` method *instaed of the `get()` method*:
+
+    $document = Prismic::getBookmark('home');
+
 In addition to all of these methods, if you have an Application Token that has access to past and future releases, you can use the `ref()` method to declare whith release you'd like to use before the `collection()`, `mask()`, `tags()`, or `query()` method:
 
     $documents = Prismic::ref('your-revision-id')->collection('your-collection-id')->get();
