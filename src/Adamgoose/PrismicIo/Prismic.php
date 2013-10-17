@@ -9,9 +9,14 @@ class Prismic {
   protected $api;
   protected $ref;
   protected $forms;
+
   protected $collection;
   protected $mask;
+  protected $tags;
   protected $query;
+
+  protected $offset = 0;
+  protected $limit;
 
   public function __construct()
   {
@@ -86,6 +91,32 @@ class Prismic {
   }
 
   /**
+   * Sets result offset
+   *
+   * @param $offset int
+   * @return $this
+   */
+  public function offset($offset)
+  {
+    $this->offset = $offset;
+
+    return $this;
+  }
+
+  /**
+   * Sets result limit
+   *
+   * @param $limit int
+   * @return $this
+   */
+  public function limit($limit)
+  {
+    $this->limit = $limit;
+
+    return $this;
+  }
+
+  /**
    * Executes the context API call
    *
    * @return array of \Prismic\Document
@@ -112,7 +143,12 @@ class Prismic {
       $ctx = $ctx->query($this->query);
     }
 
-    return $ctx->submit();
+    $return = $ctx->submit();
+
+    if($this->offset != 0 || isset($this->limit))
+      return array_slice($return, $this->offset, $this->limit);
+    else
+      return $return;
   }
 
   /**
@@ -180,6 +216,16 @@ class Prismic {
       }
 
     App::abort(404);
+  }
+
+  /**
+   * Executes the context API call and returns the first document
+   *
+   * @return \Prismic\Document
+   */
+  public function first()
+  {
+    return $this->get()[0];
   }
 
 }

@@ -36,6 +36,10 @@ To use a custom predicated query (see the [Prismic.io API Documentation](https:/
 
     $documents = Prismic::query('your-predicated-query')->get();
 
+When returning an array of items using the `get()` method, you may use the `offset()` and `limit()` methods to offset and limit the results:
+
+    $documents = Prismic::collection('my-collection')->offset(1)->limit(1)->get();
+
 To sort the results by a particular date field, you can use the `getBy()` method *instead of the `get()` method*:
 
     $documents = Prismic::collection('your-collection')->getBy('your-date-field');
