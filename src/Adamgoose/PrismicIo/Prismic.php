@@ -146,7 +146,10 @@ class Prismic {
     $return = $ctx->submit();
 
     if($this->offset != 0 || isset($this->limit))
-      return array_slice($return, $this->offset, $this->limit);
+      $return = array_slice($return, $this->offset, $this->limit);
+
+    if(count($return) == 1)
+      return $return[0];
     else
       return $return;
   }
