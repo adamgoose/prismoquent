@@ -40,6 +40,12 @@ When returning an array of items using the `get()` method, you may use the `offs
 
     $documents = Prismic::collection('my-collection')->offset(1)->limit(1)->get();
 
+Alternatively, you can use the `first()` method to set the limit to 1 and return a single instance of `\Prismic\Document`:
+
+    $document = Prismic::collection('my-collection')->first();
+    // same as
+    // $document = Prismic::collection('my-collection')->limit(1)->get();
+
 To sort the results by a particular date field, you can use the `getBy()` method *instead of the `get()` method*:
 
     $documents = Prismic::collection('your-collection')->getBy('your-date-field');

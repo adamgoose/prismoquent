@@ -225,7 +225,7 @@ class Prismic {
    */
   public function first()
   {
-    return $this->get()[0];
+    return $this->limit(1)->get();
   }
 
 }
