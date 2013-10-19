@@ -1,3 +1,7 @@
+## Notice
+
+Prismic.io for Laravel is currently being rewritten to support more complex queries and features. Please stay tuned, and expect a change in use case very soon!
+
 # Prismic.io for Laravel
 
 > [prismic.io](http://prismic.io) is a web software you can use to manage content in any kind of website or app. API-driven, it is the easiest way to integrate your content with no technology or design constraint. It is also the easiest way for content writers to edit, preview and plan updates.
