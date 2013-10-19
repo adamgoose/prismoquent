@@ -1,7 +1,7 @@
 {
     "name": "adamgoose/prismic-io",
     "description": "Prismic.io for Laravel",
-    "keywords": ["laravel"],
+    "keywords": ["laravel", "prismic-io"],
     "license": "MIT",
     "authors": [
         {

@@ -1,7 +1,3 @@
-## Notice
-
-Prismic.io for Laravel is currently being rewritten to support more complex queries and features. Please stay tuned, and expect a change in use case very soon!
-
 # Prismic.io for Laravel
 
 > [prismic.io](http://prismic.io) is a web software you can use to manage content in any kind of website or app. API-driven, it is the easiest way to integrate your content with no technology or design constraint. It is also the easiest way for content writers to edit, preview and plan updates.
@@ -10,73 +6,70 @@ Prismic.io for Laravel is currently being rewritten to support more complex quer
 
 To install Prismic.io for Laravel, add `"adamgoose/prismic-io" : "dev-master"` to your `composer.json` file, and execute `composer update`.
 
-Next, open `/app/config/app.php`, and add `'Adamgoose\PrismicIo\PrismicIoServiceProvider',` to the `providers` array and `'Prismic' => 'Adamgoose\PrismicIo\Facades\Prismic',` to the `aliases` array.
-
-Finally, execute `php artisan config:publish adamgoose/prismic-io` to publish the configuration files.
-
-## Configuration
-
-After installation, you'll want to configure Prismic.io for Laravel by editing `/app/config/packages/adamgoose/prismic-io/config.php`. Add your Prismic.io Repository ID and an Application Token.
+Next, add `"Prismic" => "Adamgoose\PrismicIo\Model"` to the `aliases` array in `/app/config/app.php`.
 
 ## Usage
 
-Prismic.io for Laravel assist you in accessing your Prismic.io Repository. It is essentially an API wrapper designed for Laravel developers. It will remind you a lot of Eloquent!
+Prismic.io for Laravel assist you in accessing your Prismic.io Repository. It is essentially an API wrapper designed for Laravel developers. It will remind you a lot of Eloquent! Let's learn by example!
 
-To get all of the documents in a Prismic.io Collection, you can use the `collection()` method:
+Say you'd like to build a website for listing recipes. Let's start by creating the `Recipe` model.
 
-    $documents = Prismic::collection('my-collection')->get();
+    // /app/models/Recipe.php
 
-> The get() method will execute the API call and return an array of \Prismic\Document (see the [Prismic.io php-kit](http://github.com/prismicio/php-kit)).
+    <?php
 
-To get all of the documents using a particular mask, you can use the `mask()` method:
+    class Recipe extends Prismic {
+        protected $repository = 'my-recipe-blog';
+        protected $token = '## TOKEN WITH MASTER ACCESS ##';
 
-    $documents = Prismic::mask('my-mask')->get();
+        public $collection = 'recipes';
+    }
 
-To get all of the documents using one or more tags, you can use the `tags()` method:
+Now, in order to retreive all of the Recipes, you can simply run the following command:
 
-    $documents = Prismic::tags(array('my-tag', 'my-tag-2', 'my-tag-3'))->get();
+    $recipes = Recipe::get();
 
-To use a custom predicated query (see the [Prismic.io API Documentation](https://developers.prismic.io/documentation/UjBe8bGIJ3EKtgBZ/api-documentation)), you can use the `query()` method:
+This will execute the query that's predefined by the 'recipes' collection on Prismic.io, and return an instance of `Illuminate\Support\Collection` containing the documents (instances of `Prismic\Document`).
 
-    $documents = Prismic::query('your-predicated-query')->get();
+> See the [Laravel API](http://laravel.com/api/class-Illuminate.Support.Collection.html) for information on `Illuminate\Support\Collection`.
 
-When returning an array of items using the `get()` method, you may use the `offset()` and `limit()` methods to offset and limit the results:
+> See the [Prismic.io php-kit](http://github.com/prismicio/php-kit) for information on `Prismic\Document`.
 
-    $documents = Prismic::collection('my-collection')->offset(1)->limit(1)->get();
+Since you have an instance of `Illuminate\Support\Collection`, you can now call methods like `sort()`, `filter()`, or `slice()` to sort, filter, or offset/limit your results.
 
-Alternatively, you can use the `first()` method to set the limit to 1 and return a single instance of `\Prismic\Document`:
+Instead of defining `public $collection` in `Recipe.php`, we could define any of the following variables:
 
-    $document = Prismic::collection('my-collection')->first();
-    // same as
-    // $document = Prismic::collection('my-collection')->limit(1)->get();
+* public `$collection` - Queries Prismic.io based on the collection definition
+* public `$mask` - Limits the results to on a particular mask
+* public `$tags` - Array of tags by which to limit the query
 
-To sort the results by a particular date field, you can use the `getBy()` method *instead of the `get()` method*:
+> You could also define `protected $ref`, which would be you release ID. This is only recommended during development.
 
-    $documents = Prismic::collection('your-collection')->getBy('your-date-field');
+If none of the variables above are defined in your model that extends `Prismic`, your model will essentially be a wrapper for the entire Prismic.io Repository.
 
-To fetch the document matching a particular slug, you can use the `getSlug()` method *instead of the `get()` method*:
+You can also define `$collection`, `$mask`, `$tags`, and `$ref` statically each time you call the model using `collection($collection)`, `mask($mask)`, `tags(array($tag, $tag2))`, and `ref($ref)` respectively. You may also chain these methods together to define the query however you'd like.
 
-    $document = Prismic::getSlug('your-document-slug');
+Say we'd like to get all of the "dessert" recipes. We could do something like this:
 
-> Note that the `getSlug()` method only returns a single instance of `\Prismic\Document` rather than array. Additionally, the slug matching is done on the basis of the `\Prismic\Document::slug()` method, therefore to generate a link, you can utilize `$document->slug()`.
+    $desserts = Recipe::tags(array('dessert'))->get();
 
-To fetch a document by its ID, you can use the `getId()` method *instead of the `get()` method*:
+Now we just need five desserts for the home-page slider:
 
-    $document = Prismic::getId('your-document-id');
+    $slides = Recipe::tags(array('dessert'))->get()->slice(0, 5);
 
-> Note that the `getId()` method only returns a single instance of `\Prismic\Document` rather than an array.
+Furthermore, you can use the `at($key, $value)` or `any($key, array $values)` methods to append predicated queries to your API call.
 
-You can also fetch a bookmarked document, by using the `getBookmark()` method *instaed of the `get()` method*:
+> You can read up on predicated queries at the [Prismic.io Developer Center](https://developers.prismic.io/documentation/UjBe8bGIJ3EKtgBZ/api-documentation#predicate-based-queries).
 
-    $document = Prismic::getBookmark('home');
+Once you've defined all of your query parameters, use the `get()` method to return an instance of `Illuminate\Support\Collection` containing your results.
 
-In addition to all of these methods, if you have an Application Token that has access to past and future releases, you can use the `ref()` method to declare whith release you'd like to use before the `collection()`, `mask()`, `tags()`, or `query()` method:
+## Shortcuts
 
-    $documents = Prismic::ref('your-revision-id')->collection('your-collection-id')->get();
+I've added a couple helper methods for you, to make querying a bit easier.
 
-Finally, you can combine these methods any way you'd like:
+The `find($id)` method will return a document (matching the current query, as defined by either your extension of `Prismic` or the runtime static call) with the designated `$id`.
 
-    $documents = Prismic::collection('your-collection-id')->tags(array('my-tag-1', 'my-tag-2'));
+The `first()` method is the same as running `->get()->first()`. Remember: since `get()` returns an instance of `Illuminate\Support\Collection`, the `first()` method executed on the collection would retreive the first item in the collection. I've simply created an alias for you. You're welcome.
 
 ## License
 
@@ -89,3 +82,8 @@ Please feel free to create a GitHub Issue, and we'll do our best to help you out
 ## Contributing
 
 Feel free to fork and submit a pull request if you think there's anything else Prismic.io for Laravel could do!
+
+## To Do
+
+* Retreive bookmarks
+* Create own version of `Prismic\Document`
