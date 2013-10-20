@@ -4,7 +4,7 @@ use stdClass;
 
 class Paragraph implements BlockInterface {
 
-  protected $type;
+  protected $type = 'paragraph';
   protected $value;
 
   /**
@@ -15,7 +15,6 @@ class Paragraph implements BlockInterface {
    */
   public function __construct(stdClass $block)
   {
-    $this->type = $block->type;
     $this->value = $block->text;
   }
 

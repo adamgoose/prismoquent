@@ -2,6 +2,7 @@
 
 use stdClass;
 use Carbon\Carbon;
+use Adamgoose\PrismicIo\Api;
 
 class Date implements FragmentInterface {
 
@@ -9,7 +10,7 @@ class Date implements FragmentInterface {
   public $epoch;
   public $carbon;
 
-  public function __construct(stdClass $fragment)
+  public function __construct(stdClass $fragment, Api $api)
   {
     $this->type = $fragment->type;
     $this->epoch = strtotime($fragment->value);

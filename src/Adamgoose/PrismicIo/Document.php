@@ -5,6 +5,7 @@ use Carbon\Carbon;
 
 class Document {
 
+  protected $api;
   protected $metadata;
   protected $data;
 
@@ -14,8 +15,10 @@ class Document {
    * @param  stdClass $data
    * @return void
    */
-  public function __construct(stdClass $data)
+  public function __construct(stdClass $data, Api $api)
   {
+    $this->api = $api;
+
     $this->metadata = $data;
     $this->data = $this->metadata->data->{$this->metadata->type};
   }
@@ -39,7 +42,7 @@ class Document {
   {
     $fragment = $this->data->{$key};
     $type = 'Adamgoose\PrismicIo\Fragments\\'.$this->getFragmentType($fragment);
-    return new $type($fragment);
+    return new $type($fragment, $this->api);
   }
 
   public function getFragmentType(stdClass $fragment)

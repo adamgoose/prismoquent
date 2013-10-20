@@ -157,7 +157,7 @@ class Api {
       throw new \ErrorException('Unable to decode json response');
 
     foreach($response as $result) {
-      $results[$result->id] = new Document($result);
+      $results[$result->id] = new Document($result, $this);
     }
 
     return $results;

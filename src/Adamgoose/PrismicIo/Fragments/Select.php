@@ -1,13 +1,14 @@
 <?php namespace Adamgoose\PrismicIo\Fragments;
 
 use stdClass;
+use Adamgoose\PrismicIo\Api;
 
 class Select implements FragmentInterface {
 
   protected $type = 'Select';
   protected $value;
 
-  public function __construct(stdClass $fragment)
+  public function __construct(stdClass $fragment, Api $api)
   {
     $this->value = $fragment->value;
   }

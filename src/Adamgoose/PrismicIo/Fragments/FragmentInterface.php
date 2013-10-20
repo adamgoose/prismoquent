@@ -1,6 +1,18 @@
 <?php namespace Adamgoose\PrismicIo\Fragments;
 
+use stdClass;
+use Adamgoose\PrismicIo\Api;
+
 interface FragmentInterface {
+
+  /**
+   * Creates new fragment object
+   *
+   * @param  stdClass $fragment
+   * @param  Api      $api
+   * @return void
+   */
+  public function __construct(stdClass $fragment, Api $api);
 
   /**
    * Parse the fragment to a string

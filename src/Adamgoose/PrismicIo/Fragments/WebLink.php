@@ -1,6 +1,7 @@
 <?php namespace Adamgoose\PrismicIo\Fragments;
 
 use stdClass;
+use Adamgoose\PrismicIo\Api;
 
 class WebLink implements FragmentInterface {
 
@@ -13,7 +14,7 @@ class WebLink implements FragmentInterface {
    * @param  stdClass $fragment
    * @return void
    */
-  public function __construct(stdClass $fragment)
+  public function __construct(stdClass $fragment, Api $api)
   {
     $this->type = $fragment->type;
     $this->value = $fragment->value;

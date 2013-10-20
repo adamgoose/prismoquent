@@ -1,6 +1,7 @@
 <?php namespace Adamgoose\PrismicIo\Fragments;
 
 use stdClass;
+use Adamgoose\PrismicIo\Api;
 
 class StructuredText implements FragmentInterface {
 
@@ -13,7 +14,7 @@ class StructuredText implements FragmentInterface {
    * @param  stdClass $fragment
    * @return void
    */
-  public function __construct(stdClass $fragment)
+  public function __construct(stdClass $fragment, Api $api)
   {
     foreach($fragment->value as $block) {
       $type = 'Adamgoose\PrismicIo\Fragments\Blocks\\' . $this->getBlockType($block);

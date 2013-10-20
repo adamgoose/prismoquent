@@ -1,9 +1,11 @@
 <?php namespace Adamgoose\PrismicIo\Fragments;
 
 use stdClass;
+use Adamgoose\PrismicIo\Api;
 
 class DocumentLink implements FragmentInterface {
 
+  private $api;
   public $type;
   public $target;
 
@@ -13,10 +15,22 @@ class DocumentLink implements FragmentInterface {
    * @param  stdClass $fragment
    * @return void
    */
-  public function __construct(stdClass $fragment)
+  public function __construct(stdClass $fragment, Api $api)
   {
+    $this->api = $api;
+
     $this->type = $fragment->type;
     $this->target = $fragment->value->document->id;
+  }
+
+  /**
+   * Retreive linked document
+   *
+   * @return Adamgoose\PrismicIo\Document
+   */
+  public function document()
+  {
+    return $this->api->call('[[:d = at(document.id, "'.$this->target.'")]]')[$this->target];
   }
 
   /**
@@ -47,5 +61,20 @@ class DocumentLink implements FragmentInterface {
   public function __toString()
   {
     return $this->toString();
+  }
+
+  /**
+   * Handle dynamic attribute calls to the method
+   *
+   * @param  string $key
+   * @return mixed
+   */
+  public function __get($key)
+  {
+    // check for local attribute
+    if(property_exists($this, $key))
+      return $this->{$key};
+    else
+      return $this->document()->{$key};
   }
 }
