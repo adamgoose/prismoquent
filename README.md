@@ -31,11 +31,11 @@ Now, in order to retreive all of the Recipes, you can simply run the following c
 
     $recipes = Recipe::get();
 
-This will execute the query that's predefined by the 'recipes' collection on Prismic.io, and return an instance of `Illuminate\Support\Collection` containing the documents (instances of `Prismic\Document`).
+This will execute the query that's predefined by the 'recipes' collection on Prismic.io, and return an instance of `Illuminate\Support\Collection` containing the documents (instances of `Adamgoose\PrismicIo\Document`).
 
 > See the [Laravel API](http://laravel.com/api/class-Illuminate.Support.Collection.html) for information on `Illuminate\Support\Collection`.
 
-> See the [Prismic.io php-kit](http://github.com/prismicio/php-kit) for information on `Prismic\Document`.
+> See the [API Documentation](http://adamgoose.github.io/prismic-io/) for information on `Adamgoose\PrismicIo\Document`.
 
 Since you have an instance of `Illuminate\Support\Collection`, you can now call methods like `sort()`, `filter()`, or `slice()` to sort, filter, or offset/limit your results.
 
@@ -84,8 +84,3 @@ Please feel free to create a GitHub Issue, and we'll do our best to help you out
 ## Contributing
 
 Feel free to fork and submit a pull request if you think there's anything else Prismic.io for Laravel could do!
-
-## To Do
-
-* Retreive bookmarks
-* Create own version of `Prismic\Document`
