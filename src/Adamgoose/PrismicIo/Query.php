@@ -140,39 +140,33 @@ class Query {
   {
     $api = $this->prepareApi();
 
-    // Initiate context
-    $context = $api->forms();
+    $query = '';
 
     // Determine form
     if($this->model->collection != null)
-      $context = $context->{$this->model->collection};
-    else
-      $context = $context->everything;
-
-    // Set ref
-    $context = $context->ref($this->getRef($api));
+      $query .= $api->collections()->{$this->model->collection}->query;
 
     // Set mask using predicated query
     if($this->model->mask != null)
-      $context = $context->query('[[:d = at(document.type, "'.$this->model->mask.'")]]');
+      $query .= '[:d = at(document.type, "'.$this->model->mask.'")]';
 
     // Set tags using predicated query
     if($this->model->tags != null)
-      $context = $context->query('[[:d = any(document.tags, ["'.implode('","', $this->model->tags).'"])]]');
+      $query .= '[:d = any(document.tags, ["'.implode('","', $this->model->tags).'"])]';
 
     // Set "at" predicated queries
     if($this->model->conditions['at'] != null)
       foreach($this->model->conditions['at'] as $at) {
-        $context = $context->query('[[:d = at('.$at['key'].', "'.$at['value'].'")]]');
+        $query .= '[:d = at('.$at['key'].', "'.$at['value'].'")]';
       }
 
     // Set "any" predicated queries
     if($this->model->conditions['any'] != null)
       foreach($this->model->conditions['any'] as $any) {
-        $context = $context->query('[[:d = any('.$any['key'].', ["'.implode('","', $any['values']).'"])]]');
+        $query .= '[:d = any('.$any['key'].', ["'.implode('","', $any['values']).'"])]';
       }
 
-    $results = $context->submit();
+    $results = $api->call($query, $this->getRef($api));
 
     return new Collection($results);
   }
@@ -184,8 +178,8 @@ class Query {
    */
   private function prepareApi()
   {
-    return \Prismic\Api::get(
-      'https://'.$this->model->repository.'.prismic.io/api',
+    return Api::get(
+      'https://'.$this->model->repository.'.prismic.io',
       $this->model->token
     );
   }
@@ -195,12 +189,12 @@ class Query {
    *
    * @return string
    */
-  private function getRef(\Prismic\Api $api)
+  private function getRef(Api $api)
   {
     if($this->model->ref != null)
       return $this->model->ref;
 
-    return $api->master()->ref;
+    return $api->master();
   }
 
 }
