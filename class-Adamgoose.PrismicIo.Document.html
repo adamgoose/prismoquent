@@ -4,7 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="generator" content="ApiGen 2.8.0" />
 
-	<title>Class Adamgoose\PrismicIo\Model | Prismic.io for Laravel</title>
+	<title>Class Adamgoose\PrismicIo\Document | Prismic.io for Laravel</title>
 
 	<script type="text/javascript" src="resources/combined.js?943336077"></script>
 	<script type="text/javascript" src="elementlist.js?1388706829"></script>
@@ -70,8 +70,8 @@
 			<h3>Classes</h3>
 			<ul>
 				<li><a href="class-Adamgoose.PrismicIo.Api.html">Api</a></li>
-				<li><a href="class-Adamgoose.PrismicIo.Document.html">Document</a></li>
-				<li class="active"><a href="class-Adamgoose.PrismicIo.Model.html">Model</a></li>
+				<li class="active"><a href="class-Adamgoose.PrismicIo.Document.html">Document</a></li>
+				<li><a href="class-Adamgoose.PrismicIo.Model.html">Model</a></li>
 				<li><a href="class-Adamgoose.PrismicIo.Query.html">Query</a></li>
 			</ul>
 
@@ -88,7 +88,7 @@
 <div id="right">
 	<div id="rightInner">
 <div id="content" class="class">
-	<h1>Class Model</h1>
+	<h1>Class Document</h1>
 
 
 
@@ -101,47 +101,87 @@
 
 
 	<div class="alert alert-info">
-		<b>Abstract</b><br />
+		
 		
 		<b>Namespace:</b> <a href="namespace-Adamgoose.html">Adamgoose</a>\<a href="namespace-Adamgoose.PrismicIo.html">PrismicIo</a><br />
 		
 
-		<b>Located at</b> <a href="source-class-Adamgoose.PrismicIo.Model.html#3-64" title="Go to source code">Adamgoose/PrismicIo/Model.php</a><br />
+		<b>Located at</b> <a href="source-class-Adamgoose.PrismicIo.Document.html#6-99" title="Go to source code">Adamgoose/PrismicIo/Document.php</a><br />
 	</div>
 
 
 
 		<h2>Methods summary</h2>
 		<table class="summary table table-bordered table-striped" id="methods">
-		<tr data-order="newQuery" id="_newQuery">
+		<tr data-order="__construct" id="___construct">
 
 			<td class="attributes"><code>
 				 public 
-				<code><a href="class-Adamgoose.PrismicIo.Query.html">Adamgoose\PrismicIo\Query</a></code>
+				
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#_newQuery">#</a>
-			<code><a href="source-class-Adamgoose.PrismicIo.Model.html#15-23" title="Go to source code">newQuery</a>( )</code>
+			<a class="anchor" href="#___construct">#</a>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#12-24" title="Go to source code">__construct</a>( <span><code><a href="class-stdClass.html">stdClass</a></code> <var>$data</var></span>, <span><code><a href="class-Adamgoose.PrismicIo.Api.html">Adamgoose\PrismicIo\Api</a></code> <var>$api</var></span> )</code>
 
 			<div class="description short">
 				
-<p>Get a new Query object</p>
+<p>Parse a new document's data</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Get a new Query object</p>
+<p>Parse a new document's data</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="list"><dl>
+						<dt><var>$data</var></dt>
+						<dd><code><code><a href="class-stdClass.html">stdClass</a></code></code><br>$data</dd>
+						<dt><var>$api</var></dt>
+						<dd></dd>
+					</dl></div>
+
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="fragments" id="_fragments">
+
+			<td class="attributes"><code>
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#_fragments">#</a>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#26-38" title="Go to source code">fragments</a>( )</code>
+
+			<div class="description short">
+				
+<p>Get all fragments</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Get all fragments</p>
 
 
 
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code><code><a href="class-Adamgoose.PrismicIo.Query.html">Adamgoose\PrismicIo\Query</a></code></code><br />
+						<code>array</code><br />
 					</div>
 
 
@@ -150,42 +190,40 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="__call" id="___call">
+		<tr data-order="fragment" id="_fragment">
 
 			<td class="attributes"><code>
 				 public 
-				mixed
+				instance
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#___call">#</a>
-			<code><a href="source-class-Adamgoose.PrismicIo.Model.html#25-37" title="Go to source code">__call</a>( <span>string <var>$method</var></span>, <span>array <var>$parameters</var></span> )</code>
+			<a class="anchor" href="#_fragment">#</a>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#40-51" title="Go to source code">fragment</a>( <span>string <var>$key</var></span> )</code>
 
 			<div class="description short">
 				
-<p>Handle dynamic method calls into the method.</p>
+<p>Get fragment object</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Handle dynamic method calls into the method.</p>
+<p>Get fragment object</p>
 
 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$method</var></dt>
-						<dd><code>string</code><br>$method</dd>
-						<dt><var>$parameters</var></dt>
-						<dd><code>array</code><br>$parameters</dd>
+						<dt><var>$key</var></dt>
+						<dd><code>string</code><br>$key</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code>mixed</code><br />
+						<code>instance</code><br>of Adamgoose\PrismicIo\Fragments\FragmentInterface<br />
 					</div>
 
 
@@ -194,42 +232,40 @@
 			</div>
 			</div></td>
 		</tr>
-		<tr data-order="__callStatic" id="___callStatic">
+		<tr data-order="getFragmentType" id="_getFragmentType">
 
 			<td class="attributes"><code>
-				 public static
-				mixed
+				 public 
+				string
 				
 				</code>
 			</td>
 
 			<td class="name"><div>
-			<a class="anchor" href="#___callStatic">#</a>
-			<code><a href="source-class-Adamgoose.PrismicIo.Model.html#39-51" title="Go to source code">__callStatic</a>( <span>string <var>$method</var></span>, <span>array <var>$parameters</var></span> )</code>
+			<a class="anchor" href="#_getFragmentType">#</a>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#53-71" title="Go to source code">getFragmentType</a>( <span><code><a href="class-stdClass.html">stdClass</a></code> <var>$fragment</var></span> )</code>
 
 			<div class="description short">
 				
-<p>Handle dynamic static calls into the method.</p>
+<p>Determine which class to use for a fragment</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Handle dynamic static calls into the method.</p>
+<p>Determine which class to use for a fragment</p>
 
 
 
 					<h4>Parameters</h4>
 					<div class="list"><dl>
-						<dt><var>$method</var></dt>
-						<dd><code>string</code><br>$method</dd>
-						<dt><var>$parameters</var></dt>
-						<dd><code>array</code><br>$parameters</dd>
+						<dt><var>$fragment</var></dt>
+						<dd><code><code><a href="class-stdClass.html">stdClass</a></code></code><br>$fragment</dd>
 					</dl></div>
 
 					<h4>Returns</h4>
 					<div class="list">
-						<code>mixed</code><br />
+						<code>string</code><br />
 					</div>
 
 
@@ -249,17 +285,17 @@
 
 			<td class="name"><div>
 			<a class="anchor" href="#___get">#</a>
-			<code><a href="source-class-Adamgoose.PrismicIo.Model.html#53-62" title="Go to source code">__get</a>( <span>string <var>$key</var></span> )</code>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#73-87" title="Go to source code">__get</a>( <span>string <var>$key</var></span> )</code>
 
 			<div class="description short">
 				
-<p>Dynamically retrieve attributes on the model.</p>
+<p>Handle dynamic attribute calls to the document</p>
 
 			</div>
 
 			<div class="description detailed hidden">
 				
-<p>Dynamically retrieve attributes on the model.</p>
+<p>Handle dynamic attribute calls to the document</p>
 
 
 
@@ -272,6 +308,43 @@
 					<h4>Returns</h4>
 					<div class="list">
 						<code>mixed</code><br />
+					</div>
+
+
+
+
+			</div>
+			</div></td>
+		</tr>
+		<tr data-order="__toString" id="___toString">
+
+			<td class="attributes"><code>
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td class="name"><div>
+			<a class="anchor" href="#___toString">#</a>
+			<code><a href="source-class-Adamgoose.PrismicIo.Document.html#89-97" title="Go to source code">__toString</a>( )</code>
+
+			<div class="description short">
+				
+<p>Handle dynamic string typecasting</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Handle dynamic string typecasting</p>
+
+
+
+
+					<h4>Returns</h4>
+					<div class="list">
+						<code>string</code><br />
 					</div>
 
 
@@ -295,17 +368,17 @@
 
 		<h2>Properties summary</h2>
 		<table class="summary table table-bordered table-striped" id="properties">
-		<tr data-order="repository" id="$repository">
+		<tr data-order="api" id="$api">
 			<td class="attributes"><code>
 				protected  
 				mixed
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#5" title="Go to source code"><var>$repository</var></a>
+					<a href="source-class-Adamgoose.PrismicIo.Document.html#8" title="Go to source code"><var>$api</var></a>
 			</td>
 			<td class="description"><div>
-				<a href="#$repository" class="anchor">#</a>
+				<a href="#$api" class="anchor">#</a>
 
 				<div class="description short">
 					
@@ -317,17 +390,17 @@
 				</div>
 			</div></td>
 		</tr>
-		<tr data-order="token" id="$token">
+		<tr data-order="metadata" id="$metadata">
 			<td class="attributes"><code>
 				protected  
 				mixed
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#6" title="Go to source code"><var>$token</var></a>
+					<a href="source-class-Adamgoose.PrismicIo.Document.html#9" title="Go to source code"><var>$metadata</var></a>
 			</td>
 			<td class="description"><div>
-				<a href="#$token" class="anchor">#</a>
+				<a href="#$metadata" class="anchor">#</a>
 
 				<div class="description short">
 					
@@ -339,105 +412,17 @@
 				</div>
 			</div></td>
 		</tr>
-		<tr data-order="ref" id="$ref">
+		<tr data-order="data" id="$data">
 			<td class="attributes"><code>
 				protected  
 				mixed
 			</code></td>
 
 			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#7" title="Go to source code"><var>$ref</var></a>
+					<a href="source-class-Adamgoose.PrismicIo.Document.html#10" title="Go to source code"><var>$data</var></a>
 			</td>
 			<td class="description"><div>
-				<a href="#$ref" class="anchor">#</a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</div></td>
-		</tr>
-		<tr data-order="collection" id="$collection">
-			<td class="attributes"><code>
-				public  
-				mixed
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#9" title="Go to source code"><var>$collection</var></a>
-			</td>
-			<td class="description"><div>
-				<a href="#$collection" class="anchor">#</a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</div></td>
-		</tr>
-		<tr data-order="mask" id="$mask">
-			<td class="attributes"><code>
-				public  
-				mixed
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#10" title="Go to source code"><var>$mask</var></a>
-			</td>
-			<td class="description"><div>
-				<a href="#$mask" class="anchor">#</a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</div></td>
-		</tr>
-		<tr data-order="tags" id="$tags">
-			<td class="attributes"><code>
-				public  
-				mixed
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#11" title="Go to source code"><var>$tags</var></a>
-			</td>
-			<td class="description"><div>
-				<a href="#$tags" class="anchor">#</a>
-
-				<div class="description short">
-					
-				</div>
-
-				<div class="description detailed hidden">
-					
-
-				</div>
-			</div></td>
-		</tr>
-		<tr data-order="conditions" id="$conditions">
-			<td class="attributes"><code>
-				public  
-				mixed
-			</code></td>
-
-			<td class="name">
-					<a href="source-class-Adamgoose.PrismicIo.Model.html#13" title="Go to source code"><var>$conditions</var></a>
-			</td>
-			<td class="description"><div>
-				<a href="#$conditions" class="anchor">#</a>
+				<a href="#$data" class="anchor">#</a>
 
 				<div class="description short">
 					
