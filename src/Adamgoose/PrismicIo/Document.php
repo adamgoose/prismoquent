@@ -23,6 +23,11 @@ class Document {
     $this->data = $this->metadata->data->{$this->metadata->type};
   }
 
+  /**
+   * Get all fragments
+   *
+   * @return array
+   */
   public function fragments()
   {
     $fragments = array();
@@ -45,6 +50,12 @@ class Document {
     return new $type($fragment, $this->api);
   }
 
+  /**
+   * Determine which class to use for a fragment
+   *
+   * @param  stdClass $fragment
+   * @return string
+   */
   public function getFragmentType(stdClass $fragment)
   {
     switch($fragment->type) {

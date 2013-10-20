@@ -8,6 +8,13 @@ class Select implements FragmentInterface {
   protected $type = 'Select';
   protected $value;
 
+  /**
+   * Create new Select Fragment
+   *
+   * @param  stdClass $fragment
+   * @param  Api      $api
+   * @return void
+   */
   public function __construct(stdClass $fragment, Api $api)
   {
     $this->value = $fragment->value;

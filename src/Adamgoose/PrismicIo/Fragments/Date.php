@@ -10,6 +10,13 @@ class Date implements FragmentInterface {
   public $epoch;
   public $carbon;
 
+  /**
+   * Create new Date Fragment
+   *
+   * @param  stdClass $fragment
+   * @param  Api      $api
+   * @return void
+   */
   public function __construct(stdClass $fragment, Api $api)
   {
     $this->type = $fragment->type;

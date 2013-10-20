@@ -9,7 +9,7 @@ class WebLink implements FragmentInterface {
   public $value;
 
   /**
-   * Create new StructuredText Fragment
+   * Create new WebLink Fragment
    *
    * @param  stdClass $fragment
    * @return void

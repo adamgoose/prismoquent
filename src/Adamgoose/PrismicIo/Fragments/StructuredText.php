@@ -12,6 +12,7 @@ class StructuredText implements FragmentInterface {
    * Create new StructuredText Fragment
    *
    * @param  stdClass $fragment
+   * @param  Api      $api
    * @return void
    */
   public function __construct(stdClass $fragment, Api $api)
@@ -22,6 +23,12 @@ class StructuredText implements FragmentInterface {
     }
   }
 
+  /**
+   * Determine which class to use for a block
+   *
+   * @param  stdClass $block
+   * @retunr string
+   */
   public function getBlockType(stdClass $block)
   {
     switch($block->type) {

@@ -10,9 +10,10 @@ class DocumentLink implements FragmentInterface {
   public $target;
 
   /**
-   * Create new StructuredText Fragment
+   * Create new DocumentLink Fragment
    *
    * @param  stdClass $fragment
+   * @param  Api      $api
    * @return void
    */
   public function __construct(stdClass $fragment, Api $api)
