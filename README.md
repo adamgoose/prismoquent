@@ -10,6 +10,8 @@ Next, add `"Prismic" => "Adamgoose\PrismicIo\Model"` to the `aliases` array in `
 
 ## Usage
 
+> A full API documentation is available [here](http://adamgoose.github.io/prismic-io/).
+
 Prismic.io for Laravel assist you in accessing your Prismic.io Repository. It is essentially an API wrapper designed for Laravel developers. It will remind you a lot of Eloquent! Let's learn by example!
 
 Say you'd like to build a website for listing recipes. Let's start by creating the `Recipe` model.
