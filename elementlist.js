@@ -1,3 +1,3 @@
 
 var ApiGen = ApiGen || {};
-ApiGen.elements = [["c","Adamgoose\\PrismicIo\\Api"],["c","Adamgoose\\PrismicIo\\Document"],["c","Adamgoose\\PrismicIo\\Fragments\\Blocks\\BlockInterface"],["c","Adamgoose\\PrismicIo\\Fragments\\Blocks\\Heading"],["c","Adamgoose\\PrismicIo\\Fragments\\Blocks\\Paragraph"],["c","Adamgoose\\PrismicIo\\Fragments\\Date"],["c","Adamgoose\\PrismicIo\\Fragments\\DocumentLink"],["c","Adamgoose\\PrismicIo\\Fragments\\FragmentInterface"],["c","Adamgoose\\PrismicIo\\Fragments\\Select"],["c","Adamgoose\\PrismicIo\\Fragments\\StructuredText"],["c","Adamgoose\\PrismicIo\\Fragments\\WebLink"],["c","Adamgoose\\PrismicIo\\Model"],["c","Adamgoose\\PrismicIo\\Query"],["c","stdClass"]];
+ApiGen.elements = [["c","Adamgoose\\PrismicIo\\Model"],["c","Adamgoose\\PrismicIo\\Query"]];
