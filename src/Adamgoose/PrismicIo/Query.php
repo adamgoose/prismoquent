@@ -123,6 +123,24 @@ class Query {
   }
 
   /**
+   * Return the document with matching slug
+   *
+   * @param  string $slug
+   * @return \Prismic\Document
+   */
+  public function findSlug($slug)
+  {
+    $collection = $this->get();
+
+    $collection = $collection->filter(function($document) use ($slug)
+    {
+      if($document->containsSlug($slug)) return true;
+    });
+
+    return $collection->first();
+  }
+
+  /**
    * Alias for get()->first();
    *
    * @return \Prismic\Document

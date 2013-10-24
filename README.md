@@ -81,6 +81,8 @@ The `find($id)` method will return a document (matching the current query, as de
 
 The `first()` method is the same as running `->get()->first()`. Remember: since `get()` returns an instance of `Illuminate\Support\Collection`, the `first()` method executed on the collection would retreive the first item in the collection. I've simply created an alias for you. You're welcome.
 
+The `findSlug($slug)` method will return a document (matching the current query, as defined by either your extension of `Prismic` or the runtime static call) with the designated `$slug`.
+
 ## License
 
 Prismic.io for Laravel is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
