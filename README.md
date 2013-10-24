@@ -21,7 +21,15 @@ Say you'd like to build a website for listing recipes. Let's start by creating t
     <?php
 
     class Recipe extends Prismic {
-        protected $repository = 'my-recipe-blog';
+        /**
+         |
+         | The syntax `https://{REPOSITORY-ID}.prismic.io/api` is the current
+         | standard, however Prismic.io has reserved the right to change this
+         | in the future. You can always find the most up-to-date API endpoint
+         | URL in your Repository Settings.
+         |
+         */
+        protected $endpoint = 'https://my-recipe-blog.prismic.io/api';
         protected $token = '## TOKEN WITH MASTER ACCESS ##';
 
         public $collection = 'recipes';
@@ -31,17 +39,17 @@ Now, in order to retreive all of the Recipes, you can simply run the following c
 
     $recipes = Recipe::get();
 
-This will execute the query that's predefined by the 'recipes' collection on Prismic.io, and return an instance of `Illuminate\Support\Collection` containing the documents (instances of `Adamgoose\PrismicIo\Document`).
+This will execute the query that's predefined by the 'recipes' collection on Prismic.io, and return an instance of `Illuminate\Support\Collection` containing the documents (instances of `Prismic\Document`).
 
 > See the [Laravel API](http://laravel.com/api/class-Illuminate.Support.Collection.html) for information on `Illuminate\Support\Collection`.
 
-> See the [API Documentation](http://adamgoose.github.io/prismic-io/) for information on `Adamgoose\PrismicIo\Document`.
+> See the [php-kit Documentation](https://github.com/prismicio/php-kit/blob/master/src/Prismic/Document.php) for information on `Adamgoose\PrismicIo\Document`.
 
 Since you have an instance of `Illuminate\Support\Collection`, you can now call methods like `sort()`, `filter()`, or `slice()` to sort, filter, or offset/limit your results.
 
 Instead of defining `public $collection` in `Recipe.php`, we could define any of the following variables:
 
-* public `$collection` - Queries Prismic.io based on the collection definition
+* public `$endpoint` - Sets API endpoint. *Required!*
 * public `$mask` - Limits the results to on a particular mask
 * public `$tags` - Array of tags by which to limit the query
 

@@ -1,5 +1,6 @@
 <?php namespace Adamgoose\PrismicIo;
 
+use Prismic\Api;
 use Illuminate\Support\Collection;
 
 class Query {
@@ -142,10 +143,6 @@ class Query {
 
     $query = '';
 
-    // Determine form
-    if($this->model->collection != null)
-      $query .= $api->collections()->{$this->model->collection}->query;
-
     // Set mask using predicated query
     if($this->model->mask != null)
       $query .= '[:d = at(document.type, "'.$this->model->mask.'")]';
@@ -166,7 +163,17 @@ class Query {
         $query .= '[:d = any('.$any['key'].', ["'.implode('","', $any['values']).'"])]';
       }
 
-    $results = $api->call($query, $this->getRef($api));
+    if($this->model->collection != null)
+      $form = $api->forms()->{$this->model->collection};
+    else
+      $form = $api->forms()->everything;
+
+    $form = $form->ref($this->getRef($api));
+
+    if($query != '')
+      $form = $form->query("[$query]");
+
+    $results = $form->submit();
 
     return new Collection($results);
   }
@@ -179,7 +186,7 @@ class Query {
   private function prepareApi()
   {
     return Api::get(
-      'https://'.$this->model->repository.'.prismic.io',
+      $this->model->endpoint,
       $this->model->token
     );
   }
@@ -194,7 +201,7 @@ class Query {
     if($this->model->ref != null)
       return $this->model->ref;
 
-    return $api->master();
+    return $api->master()->getRef();
   }
 
 }
