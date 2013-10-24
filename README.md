@@ -43,7 +43,7 @@ This will execute the query that's predefined by the 'recipes' collection on Pri
 
 > See the [Laravel API](http://laravel.com/api/class-Illuminate.Support.Collection.html) for information on `Illuminate\Support\Collection`.
 
-> See the [php-kit Documentation](https://github.com/prismicio/php-kit/blob/master/src/Prismic/Document.php) for information on `Adamgoose\PrismicIo\Document`.
+> See the [php-kit Documentation](https://github.com/prismicio/php-kit/blob/master/src/Prismic/Document.php) for information on `Prismic\Document`.
 
 Since you have an instance of `Illuminate\Support\Collection`, you can now call methods like `sort()`, `filter()`, or `slice()` to sort, filter, or offset/limit your results.
 
