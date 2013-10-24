@@ -35,6 +35,8 @@ Say you'd like to build a website for listing recipes. Let's start by creating t
         public $collection = 'recipes';
     }
 
+> Alternatively, you can define `endpoint` and `token` in `/app/config/prismic.php` and remove them from this class definition. If you need to override the values in config for only a particular model, feel free to include `protected $endpoint` and `protected $token` here.
+
 Now, in order to retreive all of the Recipes, you can simply run the following command:
 
     $recipes = Recipe::get();
@@ -49,8 +51,8 @@ Since you have an instance of `Illuminate\Support\Collection`, you can now call 
 
 Instead of defining `public $collection` in `Recipe.php`, we could define any of the following variables:
 
-* public `$endpoint` - Sets API endpoint. *Required!*
-* public `$mask` - Limits the results to on a particular mask
+* public `$collection` - Limits the results to a particular collection
+* public `$mask` - Limits the results to a particular mask
 * public `$tags` - Array of tags by which to limit the query
 
 > You could also define `protected $ref`, which would be you release ID. This is only recommended during development.

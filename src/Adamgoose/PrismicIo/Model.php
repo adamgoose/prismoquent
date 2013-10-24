@@ -1,8 +1,10 @@
 <?php namespace Adamgoose\PrismicIo;
 
+use Illuminate\Support\Facades\Config;
+
 abstract class Model {
 
-  protected $repository;
+  protected $endpoint;
   protected $token;
   protected $ref;
 
@@ -11,6 +13,20 @@ abstract class Model {
   public $tags;
 
   public $conditions;
+
+  /**
+   * Grab variables from config
+   *
+   * @return void
+   */
+  public function __construct()
+  {
+    if(Config::has('prismic.endpoint') && !isset($this->endpoint))
+      $this->endpoint = Config::get('prismic.endpoint');
+
+    if(Config::has('prismic.token') && !isset($this->token))
+      $this->token = Config::get('prismic.token');
+  }
 
   /**
    * Get a new Query object
