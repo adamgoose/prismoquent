@@ -12,7 +12,7 @@ abstract class Model {
   public $mask;
   public $tags;
 
-  public $conditions;
+  public $conditions = array();
 
   /**
    * Grab variables from config

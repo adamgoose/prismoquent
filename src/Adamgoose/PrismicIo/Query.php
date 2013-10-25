@@ -178,19 +178,19 @@ class Query {
       $query .= '[:d = any(document.tags, ["'.implode('","', $this->model->tags).'"])]';
 
     // Set "at" predicated queries
-    if($this->model->conditions['at'] != null)
+    if(array_key_exists('at', $this->model->conditions))
       foreach($this->model->conditions['at'] as $at) {
         $query .= '[:d = at('.$at['key'].', "'.$at['value'].'")]';
       }
 
     // Set "any" predicated queries
-    if($this->model->conditions['any'] != null)
+    if(array_key_exists('any', $this->model->conditions))
       foreach($this->model->conditions['any'] as $any) {
         $query .= '[:d = any('.$any['key'].', ["'.implode('","', $any['values']).'"])]';
       }
 
     // Set "fulltext" predicated queries
-    if($this->model->conditions['fulltext'] != null)
+    if(array_key_exists('fulltext', $this->model->conditions))
       foreach($this->model->conditions['fulltext'] as $fulltext) {
         $query .= '[:d = fulltext('.$fulltext['key'].', "'.$fulltext['value'].'")]';
       }
