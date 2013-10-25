@@ -69,7 +69,7 @@ Now we just need five desserts for the home-page slider:
 
     $slides = Recipe::tags(array('dessert'))->get()->slice(0, 5);
 
-Furthermore, you can use the `at($key, $value)` or `any($key, array $values)` methods to append predicated queries to your API call.
+Furthermore, you can use the `at($key, $value)`, `any($key, array $values)`, or `fulltext($key, $value)` methods to append predicated queries to your API call.
 
 > You can read up on predicated queries at the [Prismic.io Developer Center](https://developers.prismic.io/documentation/UjBe8bGIJ3EKtgBZ/api-documentation#predicate-based-queries).
 

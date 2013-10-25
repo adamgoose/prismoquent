@@ -79,10 +79,7 @@ class Query {
    */
   public function at($key, $value)
   {
-    $this->model->conditions['at'][] = array(
-      'key' => $key,
-      'value' => $value,
-    );
+    $this->model->conditions['at'][] = compact('key', 'value');
 
     return $this;
   }
@@ -96,10 +93,21 @@ class Query {
    */
   public function any($key, array $values)
   {
-    $this->model->conditions['any'][] = array(
-      'key' => $key,
-      'values' => $values,
-    );
+    $this->model->conditions['any'][] = compact('key', 'values');
+
+    return $this;
+  }
+
+  /**
+   * Appends a "fulltext" predicated query
+   *
+   * @param  string $key
+   * @param  string $value
+   * @return \Adamgoose\Prismic\Query
+   */
+  public function fulltext($key, $value)
+  {
+    $this->model->conditions['fulltext'][] = compact('key', 'value');
 
     return $this;
   }
@@ -179,6 +187,12 @@ class Query {
     if($this->model->conditions['any'] != null)
       foreach($this->model->conditions['any'] as $any) {
         $query .= '[:d = any('.$any['key'].', ["'.implode('","', $any['values']).'"])]';
+      }
+
+    // Set "fulltext" predicated queries
+    if($this->model->conditions['fulltext'] != null)
+      foreach($this->model->conditions['fulltext'] as $fulltext) {
+        $query .= '[:d = fulltext('.$fulltext['key'].', "'.$fulltext['value'].'")]';
       }
 
     if($this->model->collection != null)
