@@ -195,16 +195,20 @@ class Query {
         $query .= '[:d = fulltext('.$fulltext['key'].', "'.$fulltext['value'].'")]';
       }
 
+    // Determine which API form to use
     if($this->model->collection != null)
       $form = $api->forms()->{$this->model->collection};
     else
       $form = $api->forms()->everything;
 
+    // Declare the ref
     $form = $form->ref($this->getRef($api));
 
+    // Append the query, if applicable
     if($query != '')
       $form = $form->query("[$query]");
 
+    // Submit
     $results = $form->submit();
 
     return new Collection($results);
