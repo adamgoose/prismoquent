@@ -1,5 +1,6 @@
 <?php namespace Adamgoose\PrismicIo;
 
+use Prismic\Document;
 use Illuminate\Support\Facades\Config;
 
 abstract class Model {
@@ -14,18 +15,23 @@ abstract class Model {
 
   public $conditions = array();
 
+  public $document;
+
   /**
    * Grab variables from config
    *
    * @return void
    */
-  public function __construct()
+  public function __construct(Document $document = null)
   {
     if(Config::has('prismic.endpoint') && !isset($this->endpoint))
       $this->endpoint = Config::get('prismic.endpoint');
 
     if(Config::has('prismic.token') && !isset($this->token))
       $this->token = Config::get('prismic.token');
+
+    if($document instanceof Document)
+      $this->document = $document;
   }
 
   /**
@@ -47,9 +53,12 @@ abstract class Model {
    */
   public function __call($method, $parameters)
   {
-    $query = $this->newQuery();
-
-    return call_user_func_array(array($query, $method), $parameters);
+    if($this->document instanceof Document) {
+      return call_user_func_array(array($this->document, $method), $parameters);
+    } else {
+      $query = $this->newQuery();
+      return call_user_func_array(array($query, $method), $parameters);
+    }
   }
 
   /**
@@ -74,7 +83,10 @@ abstract class Model {
    */
   public function __get($key)
   {
-    return $this->{$key};
+    if($this->document instanceof Document)
+      return $this->document->get($this->document->getType().'.'.$key)->asText();
+    else
+      return $this->{$key};
   }
 
 }

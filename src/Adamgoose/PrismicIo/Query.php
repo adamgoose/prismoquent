@@ -211,7 +211,13 @@ class Query {
     // Submit
     $results = $form->submit();
 
-    return new Collection($results);
+    $class = get_class($this->model);
+
+    $models = [];
+    foreach($results as $result)
+      $models[] = new $class($result);
+
+    return new Collection($models);
   }
 
   /**
