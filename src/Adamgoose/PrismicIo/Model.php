@@ -15,6 +15,9 @@ abstract class Model {
 
   public $conditions = array();
 
+  public $pageSize = 20;
+  public $page = 1;
+
   public $document;
 
   /**

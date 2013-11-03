@@ -113,6 +113,32 @@ class Query {
   }
 
   /**
+   * Define the pageSize for the query
+   *
+   * @param  int $pageSize
+   * @return \Adamgoose\Prismic\Query
+   */
+  public function pageSize($pageSize)
+  {
+    $this->model->pageSize = $pageSize;
+
+    return $this;
+  }
+
+  /**
+   * Define which page to return
+   *
+   * @param  int $page
+   * @return \Adamgoose\Prismic\Query
+   */
+  public function page($page)
+  {
+    $this->model->page = $page;
+
+    return $this;
+  }
+
+  /**
    * Alias for at('document.id', $id)
    *
    * @param  string $id
@@ -203,6 +229,9 @@ class Query {
 
     // Declare the ref
     $form = $form->ref($this->getRef($api));
+
+    // Define pagination
+    $form = $form->pageSize($this->model->pageSize)->page($this->model->page);
 
     // Append the query, if applicable
     if($query != '')
