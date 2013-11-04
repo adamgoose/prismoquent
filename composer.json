@@ -1,7 +1,7 @@
 {
     "name": "adamgoose/prismic-io",
     "description": "Prismic.io for Laravel",
-    "keywords": ["laravel"],
+    "keywords": ["laravel", "prismic-io"],
     "license": "MIT",
     "authors": [
         {
@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.3.0",
         "illuminate/support": "4.0.x",
-        "prismic/php-sdk" : "dev-master"
+        "prismic/php-sdk": "dev-master"
     },
     "autoload": {
         "psr-0": {
