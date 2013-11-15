@@ -87,7 +87,7 @@ abstract class Model {
   public function __get($key)
   {
     if($this->document instanceof Document) {
-      if(array_key_exists($this->document->getType.".".$key, $this->document->getFragments()))
+      if(array_key_exists($this->document->getType().".".$key, $this->document->getFragments()))
         return $this->document->get($this->document->getType().'.'.$key)->asText();
       else
         return '';
