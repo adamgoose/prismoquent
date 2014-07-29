@@ -7,13 +7,13 @@ abstract class Model {
 
   protected $endpoint;
   protected $token;
-  protected $ref;
+  public $ref;
 
   public $collection;
   public $mask;
   public $tags;
 
-  public $conditions = array();
+  public $conditions = [];
 
   public $pageSize = 20;
   public $page = 1;
@@ -23,7 +23,9 @@ abstract class Model {
   /**
    * Grab variables from config
    *
-   * @return void
+   * @param Document $document
+   *
+   * @return \Adamgoose\PrismicIo\Model
    */
   public function __construct(Document $document = null)
   {
@@ -57,10 +59,10 @@ abstract class Model {
   public function __call($method, $parameters)
   {
     if($this->document instanceof Document) {
-      return call_user_func_array(array($this->document, $method), $parameters);
+      return call_user_func_array([$this->document, $method], $parameters);
     } else {
       $query = $this->newQuery();
-      return call_user_func_array(array($query, $method), $parameters);
+      return call_user_func_array([$query, $method], $parameters);
     }
   }
 
@@ -75,7 +77,7 @@ abstract class Model {
   {
     $instance = new static;
 
-    return call_user_func_array(array($instance, $method), $parameters);
+    return call_user_func_array([$instance, $method], $parameters);
   }
 
   /**
