@@ -3,99 +3,101 @@
 use Prismic\Document;
 use Illuminate\Support\Facades\Config;
 
-abstract class Model {
+abstract class Model
+{
 
-  protected $endpoint;
-  protected $token;
-  public $ref;
+    protected $endpoint;
+    protected $token;
+    public $ref;
 
-  public $collection;
-  public $mask;
-  public $tags;
+    public $collection;
+    public $mask;
+    public $tags;
 
-  public $conditions = [];
+    public $conditions = [];
 
-  public $pageSize = 20;
-  public $page = 1;
+    public $pageSize = 20;
+    public $page = 1;
 
-  public $document;
+    public $document;
 
-  /**
-   * Grab variables from config
-   *
-   * @param Document $document
-   *
-   * @return \Adamgoose\PrismicIo\Model
-   */
-  public function __construct(Document $document = null)
-  {
-    if(Config::has('prismic.endpoint') && !isset($this->endpoint))
-      $this->endpoint = Config::get('prismic.endpoint');
+    public $cache = null;
 
-    if(Config::has('prismic.token') && !isset($this->token))
-      $this->token = Config::get('prismic.token');
+    /**
+     * Grab variables from config
+     *
+     * @param Document $document
+     *
+     * @return \Adamgoose\PrismicIo\Model
+     */
+    public function __construct(Document $document = null)
+    {
+        if (Config::has('prismic.endpoint') && !isset($this->endpoint))
+            $this->endpoint = Config::get('prismic.endpoint');
 
-    if($document instanceof Document)
-      $this->document = $document;
-  }
+        if (Config::has('prismic.token') && !isset($this->token))
+            $this->token = Config::get('prismic.token');
 
-  /**
-   * Get a new Query object
-   *
-   * @return \Adamgoose\PrismicIo\Query
-   */
-  public function newQuery()
-  {
-    return new Query($this);
-  }
-
-  /**
-   * Handle dynamic method calls into the method.
-   *
-   * @param  string  $method
-   * @param  array   $parameters
-   * @return mixed
-   */
-  public function __call($method, $parameters)
-  {
-    if($this->document instanceof Document) {
-      return call_user_func_array([$this->document, $method], $parameters);
-    } else {
-      $query = $this->newQuery();
-      return call_user_func_array([$query, $method], $parameters);
+        if ($document instanceof Document)
+            $this->document = $document;
     }
-  }
 
-  /**
-   * Handle dynamic static calls into the method.
-   *
-   * @param  string  $method
-   * @param  array   $parameters
-   * @return mixed
-   */
-  public static function __callStatic($method, $parameters)
-  {
-    $instance = new static;
-
-    return call_user_func_array([$instance, $method], $parameters);
-  }
-
-  /**
-   * Dynamically retrieve attributes on the model.
-   *
-   * @param  string $key
-   * @return mixed
-   */
-  public function __get($key)
-  {
-    if($this->document instanceof Document) {
-      if(array_key_exists($this->document->getType().".".$key, $this->document->getFragments()))
-        return $this->document->get($this->document->getType().'.'.$key)->asText();
-      else
-        return '';
+    /**
+     * Get a new Query object
+     *
+     * @return \Adamgoose\PrismicIo\Query
+     */
+    public function newQuery()
+    {
+        return new Query($this);
     }
-    else
-      return $this->{$key};
-  }
+
+    /**
+     * Handle dynamic method calls into the method.
+     *
+     * @param  string $method
+     * @param  array $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        if ($this->document instanceof Document) {
+            return call_user_func_array([$this->document, $method], $parameters);
+        } else {
+            $query = $this->newQuery();
+            return call_user_func_array([$query, $method], $parameters);
+        }
+    }
+
+    /**
+     * Handle dynamic static calls into the method.
+     *
+     * @param  string $method
+     * @param  array $parameters
+     * @return mixed
+     */
+    public static function __callStatic($method, $parameters)
+    {
+        $instance = new static;
+
+        return call_user_func_array([$instance, $method], $parameters);
+    }
+
+    /**
+     * Dynamically retrieve attributes on the model.
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        if ($this->document instanceof Document) {
+            if (array_key_exists($this->document->getType() . "." . $key, $this->document->getFragments()))
+                return $this->document->get($this->document->getType() . '.' . $key)->asText();
+            else
+                return '';
+        } else
+            return $this->{$key};
+    }
 
 }

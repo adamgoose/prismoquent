@@ -286,7 +286,9 @@ class Query
     {
         return Api::get(
             $this->model->endpoint,
-            $this->model->token
+            $this->model->token,
+            null,
+            $this->model->cache
         );
     }
 
